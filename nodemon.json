@@ -1,8 +1,0 @@
-{
-  "ignore": [
-    "build/",
-    "test/"
-  ],
-  "ext": "ts,js,jsx,json",
-  "exec": "ts-node ./src/index.ts"
-}

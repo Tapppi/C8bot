@@ -2,10 +2,12 @@
   "name": "c8bot",
   "version": "1.0.0",
   "description": "c8 discord botti",
-  "main": "index.js",
+  "engines": {
+    "node": ">= 14.16 <15"
+  },
   "scripts": {
     "dev": "nodemon",
-    "start": "node build/src/main.js",
+    "start": "node build/src/index.ts",
     "clean": "rimraf coverage build tmp",
     "build": "tsc -p tsconfig.release.json",
     "build:watch": "tsc -w -p tsconfig.release.json",
@@ -13,15 +15,14 @@
     "test:watch": "ava --watch",
     "format": "prettier --config ./.prettierrc.json --ignore-path ./.prettierignore --write",
     "lint": "xo",
-    "lint:fix": "xo --fix"
+    "lint:fix": "xo --fix",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Tapppi/C8bot.git"
   },
-  "keywords": [
-    "c8"
-  ],
+  "keywords": ["c8"],
   "author": "",
   "license": "UNLICENSED",
   "bugs": {
@@ -31,6 +32,8 @@
   "devDependencies": {
     "@types/node": "^14.14.41",
     "ava": "^3.15.0",
+    "husky": "^6.0.0",
+    "lint-staged": "^10.5.4",
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
@@ -40,5 +43,18 @@
   },
   "dependencies": {
     "tslib": "^2.2.0"
+  },
+  "xo": {
+    "prettier": true
+  },
+  "lint-staged": {
+    "*.js": ["npm run format", "npm run lint:fix"],
+    "*.json": ["npm run format"],
+    "*.geojson": ["npm run format"]
+  },
+  "nodemon": {
+    "ignore": ["build/", "test/"],
+    "ext": "ts,js,jsx,json",
+    "exec": "ts-node ./src/index.ts"
   }
 }

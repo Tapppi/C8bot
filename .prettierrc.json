@@ -4,27 +4,19 @@
   "tabWidth": 2,
   "overrides": [
     {
-      "files": [
-        "*.ts",
-        "*.tsx"
-      ],
+      "files": ["*.ts", "*.tsx"],
       "options": {
         "parser": "typescript"
       }
     },
     {
-      "files": [
-        "*.gql"
-      ],
+      "files": ["*.gql"],
       "options": {
         "singleQuote": false
       }
     },
     {
-      "files": [
-        "*.json",
-        "*.geojson"
-      ],
+      "files": ["*.json", "*.geojson"],
       "options": {
         "parser": "json",
         "singleQuote": false
