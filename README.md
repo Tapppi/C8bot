@@ -3,11 +3,14 @@ Discord botti. MVP announcementtii ja muut random paskaa
 
 ## How to run
 
-* requires Node 14.x
-* copy `.env.dist` to `.env` and add required values
+* Requires Node 14.x
+* Copy `.env.dist` as new file `.env` and add required values
 
 ```bash
 npm install
+
+cp .env.dist .env
+$EDITOR .env
 
 npm run dev
 ```
