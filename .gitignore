@@ -8,7 +8,12 @@ lerna-debug.log*
 
 # Editors
 .vscode
-!.vscode/tasks.js
+!/.vscode/launch.json
+!/.vscode/tasks.js
+.idea/
+/jsconfig.json
+**/.project
+**/.settings
 
 # Diagnostic reports (https://nodejs.org/api/report.html)
 report.[0-9]*.[0-9]*.[0-9]*.[0-9]*.json
