@@ -8,7 +8,15 @@ Discord botti. MVP announcementtii ja muut random paskaa
 
 ### Requirements
 * Node 14.x: recommend [nvm](https://github.com/nvm-sh/nvm) on linux and macOS
+
+### Optional requirements
+
+Optional requirements for better performance of the bot.
+
 * Python: `brew install python`/`sudo apt install python`
+* Make: `brew install make`/`sudo apt install make`
+* GCC: `brew install gcc`/`sudo apt install gcc`
+* G++: `brew install g++`/`sudo apt install g++`
 
 ### Configure and run 
 
