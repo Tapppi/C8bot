@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "nodemon",
-    "start": "node build/src/index.ts",
+    "start": "node --unhandled-rejections=strict build/src/index.ts",
     "clean": "rimraf coverage build tmp",
     "build": "tsc -p tsconfig.release.json",
     "build:watch": "tsc -w -p tsconfig.release.json",
@@ -52,6 +52,7 @@
     "prettier": true
   },
   "lint-staged": {
+<<<<<<< HEAD
     "*.js": [
       "npm run format",
       "npm run lint:fix"
@@ -62,6 +63,13 @@
     "*.geojson": [
       "npm run format"
     ]
+=======
+    "*.ts": ["npm run format", "npm run lint:fix"],
+    "*.tsx": ["npm run format", "npm run lint:fix"],
+    "*.js": ["npm run format", "npm run lint:fix"],
+    "*.json": ["npm run format"],
+    "*.geojson": ["npm run format"]
+>>>>>>> b54bf49fe8700e61a5d7ac998da9e2ee05ac2e5e
   },
   "nodemonConfig": {
     "ignore": [
@@ -69,6 +77,6 @@
       "test/"
     ],
     "ext": "ts,js,jsx,json",
-    "exec": "ts-node ./src/index.ts"
+    "exec": "node --require ts-node/register --unhandled-rejections=strict ./src/index.ts"
   }
 }
