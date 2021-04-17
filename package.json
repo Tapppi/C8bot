@@ -22,7 +22,9 @@
     "type": "git",
     "url": "git+https://github.com/Tapppi/C8bot.git"
   },
-  "keywords": ["c8"],
+  "keywords": [
+    "c8"
+  ],
   "author": "",
   "license": "UNLICENSED",
   "bugs": {
@@ -50,12 +52,22 @@
     "prettier": true
   },
   "lint-staged": {
-    "*.js": ["npm run format", "npm run lint:fix"],
-    "*.json": ["npm run format"],
-    "*.geojson": ["npm run format"]
+    "*.js": [
+      "npm run format",
+      "npm run lint:fix"
+    ],
+    "*.json": [
+      "npm run format"
+    ],
+    "*.geojson": [
+      "npm run format"
+    ]
   },
   "nodemonConfig": {
-    "ignore": ["build/", "test/"],
+    "ignore": [
+      "build/",
+      "test/"
+    ],
     "ext": "ts,js,jsx,json",
     "exec": "ts-node ./src/index.ts"
   }
