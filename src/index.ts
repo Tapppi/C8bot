@@ -12,6 +12,8 @@ const heiksman = [
   'Kissamies 2.0',
   'Joulupukkiki on kateellinen sen parralle',
   'Vittuku ei oo massii..',
+  'MENNÄÄ ANTAA JES JES JES',
+  'Ei ei älä selkää, sattuu!!',
 ];
 
 const jokes = [
