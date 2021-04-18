@@ -14,6 +14,7 @@ const heiksman = [
   'Vittuku ei oo massii..',
   'MENNÄÄ ANTAA JES JES JES',
   'Ei ei älä selkää, sattuu!!',
+  'Poketkaa sit ku on tilaa...'
 ];
 
 const jokes = [
