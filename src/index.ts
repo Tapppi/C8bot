@@ -1,29 +1,38 @@
-import _ from './env';
-import Discord from "discord.js";
+import config from './config';
+import Discord from 'discord.js';
 
 const client = new Discord.Client();
 
 async function main() {
-  if (!process.env.DISCORD_TOKEN) {
-    throw new Error('No discord token configured, copy .env.dist to .env and set DISCROD_TOKEN')
-  }
-
   // Login to discord
-  await client.login(process.env.DISCORD_TOKEN);
+  await client.login(config.DiscordToken);
 
-  client.on("ready", () => {
-      console.log("Bot ready!");
-    });
+  client.on('ready', () => {
+    console.log('Bot ready');
+  });
 
-    client.on("message", (message) => {
-      if (message.content === "!test") {
-        message.reply("Toimii");
-      }
-    });
+  client.on('message', async (message) => {
+    console.log(
+      `${message.author.username} lähetti viestin: ${message.content}`,
+    );
+
+    if (message.content === '!test') {
+      await message.reply('Toimii madafaka');
+    }
+
+    if (message.content === '!heikki') {
+      await message.reply('Heikki on koira. Hau hau');
+    }
+  });
 }
 
-main().then(() => console.log('exit')).catch((err) => {
-  console.error('Fatal error from main function:')
-  console.error(err);
-  process.exit(1);
-});
+main()
+  .then(() => {
+    console.log('Server init ready');
+  })
+  .catch((error) => {
+    console.error('Fatal error while initializing');
+    console.error(error);
+    // eslint-disable-next-line unicorn/no-process-exit
+    process.exit(1);
+  });
