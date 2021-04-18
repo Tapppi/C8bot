@@ -7,7 +7,7 @@
   },
   "scripts": {
     "dev": "nodemon",
-    "start": "node --unhandled-rejections=strict build/src/index.ts",
+    "start": "node --unhandled-rejections=strict build/src/index.js",
     "clean": "rimraf coverage build tmp",
     "build": "tsc -p tsconfig.release.json",
     "build:watch": "tsc -w -p tsconfig.release.json",
