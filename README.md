@@ -36,6 +36,17 @@ $EDITOR .env
 npm run dev
 ```
 
+## Deploy
+
+The app is deployed to [Heroku](https://heroku.com) on every push to `main`.
+[Find the control panel here](https://dashboard.heroku.com/apps/c8-bot)
+
+To manually deploy:
+* [Install Heroku CLI](https://devcenter.heroku.com/articles/heroku-cli)
+* `heroku login`
+* `heroku git:remote -a c8-bot`
+* `git push heroku main`
+
 ## The boring stuff
 
 All rights reserved to the relevant contributors. No license granted. Fuck off.
