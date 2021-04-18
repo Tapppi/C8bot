@@ -59,9 +59,6 @@
     "prettier": true
   },
   "lint-staged": {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
     "*.ts": [
       "npm run format",
       "npm run lint:fix"
@@ -70,7 +67,6 @@
       "npm run format",
       "npm run lint:fix"
     ],
->>>>>>> fbe574a454796e706f9309712423cab465e38dd0
     "*.js": [
       "npm run format",
       "npm run lint:fix"
@@ -81,16 +77,6 @@
     "*.geojson": [
       "npm run format"
     ]
-<<<<<<< HEAD
-=======
-    "*.ts": ["npm run format", "npm run lint:fix"],
-    "*.tsx": ["npm run format", "npm run lint:fix"],
-    "*.js": ["npm run format", "npm run lint:fix"],
-    "*.json": ["npm run format"],
-    "*.geojson": ["npm run format"]
->>>>>>> b54bf49fe8700e61a5d7ac998da9e2ee05ac2e5e
-=======
->>>>>>> fbe574a454796e706f9309712423cab465e38dd0
   },
   "nodemonConfig": {
     "ignore": [
