@@ -6,16 +6,20 @@
     "node": ">= 14.16 <15"
   },
   "scripts": {
-    "dev": "nodemon",
+    "dev": "npx nodemon",
     "start": "node --unhandled-rejections=strict build/src/index.js",
     "clean": "rimraf coverage build tmp",
-    "build": "tsc -p tsconfig.release.json",
-    "build:watch": "tsc -w -p tsconfig.release.json",
-    "test": "ava",
-    "test:watch": "ava --watch",
-    "format": "prettier --config ./.prettierrc.json --ignore-path ./.prettierignore --write",
-    "lint": "xo",
-    "lint:fix": "xo --fix",
+    "build": "npx tsc -p tsconfig.release.json",
+    "build:watch": "npx tsc -w -p tsconfig.release.json",
+    "test": "npx ava",
+    "test:watch": "npx ava --watch",
+    "format": "npx prettier --config ./.prettierrc.json --ignore-path ./.prettierignore --write",
+    "lint": "npx xo",
+    "lint:fix": "npx xo --fix",
+    "migrate": "cd src && npx dotenv-cli dotenv -e ../.env npx knex migrate:latest",
+    "rollback": "cd src && npx dotenv-cli dotenv -e ../.env npx knex migrate:rollback",
+    "seed": "cd src && npx dotenv-cli dotenv -e ../.env npx knex seed:run",
+    "seed:prd": "cd build/src && npx dotenv-cli dotenv -e ../.env.prd npx knex seed:run",
     "prepare": "husky install"
   },
   "repository": {
@@ -34,6 +38,7 @@
   "devDependencies": {
     "@types/node": "^14.14.41",
     "ava": "^3.15.0",
+    "dotenv-cli": "^4.0.0",
     "husky": "^6.0.0",
     "lint-staged": "^10.5.4",
     "nodemon": "^2.0.7",
@@ -44,9 +49,15 @@
     "xo": "^0.38.2"
   },
   "dependencies": {
+    "@types/nanoid-dictionary": "^4.2.0",
     "discord.js": "^12.5.3",
     "dotenv": "^8.2.0",
+    "knex": "^0.95.4",
     "libsodium-wrappers": "^0.7.9",
+    "nanoid": "^3.1.22",
+    "nanoid-dictionary": "^4.3.0",
+    "objection": "^2.2.15",
+    "pg": "^8.6.0",
     "tslib": "^2.2.0",
     "zlib-sync": "^0.1.7"
   },
@@ -56,7 +67,28 @@
     "utf-8-validate": "^5.0.4"
   },
   "xo": {
-    "prettier": true
+    "prettier": true,
+    "unicorn/filename-case": "none",
+    "overrides": [
+      {
+        "files": "src/models/*.ts",
+        "rules": {
+          "unicorn/filename-case": [
+            "error",
+            {"case": "pascalCase"}
+          ]
+        }
+      },
+      {
+        "files": ["src/migrations/*.ts", "src/seeds/**/*.ts"],
+        "rules": {
+          "unicorn/filename-case": [
+            "error",
+            {"case": "snakeCase"}
+          ]
+        }
+      }
+    ]
   },
   "lint-staged": {
     "*.ts": [
@@ -84,6 +116,9 @@
       "test/"
     ],
     "ext": "ts,js,jsx,json",
-    "exec": "node --require ts-node/register --unhandled-rejections=strict ./src/index.ts"
+    "exec": "node --require ts-node/register --unhandled-rejections=strict ./src/index.ts",
+    "env": {
+      "NODE_ENV": "development"
+    }
   }
 }

@@ -8,6 +8,8 @@ Discord botti. MVP announcementtii ja muut random paskaa
 
 ### Requirements
 * Node 14.x: recommend [nvm](https://github.com/nvm-sh/nvm) on linux and macOS
+* Docker desktop for compose, for local database setup
+  * or docker compose directly, see [install instructions](https://docs.docker.com/compose/install/)
 
 ### Optional requirements
 
@@ -17,6 +19,19 @@ Optional requirements for better performance of the bot.
 * Make: `brew install make`/`sudo apt install make`
 * GCC: `brew install gcc`/`sudo apt install gcc`
 * G++: `brew install g++`/`sudo apt install g++`
+
+### Useful VSCode plugins
+
+* [Prettier](https://marketplace.visualstudio.com/items?itemName=esbenp.prettier-vscode)
+* [XO](https://marketplace.visualstudio.com/items?itemName=samverschueren.linter-xo)
+#### Windows
+
+See [this article](https://code.visualstudio.com/blogs/2020/07/01/containers-wsl#_new-era-of-virtualization)
+for a guide on how to use VSCode, WSL2 and Docker desktop.
+
+* [Remote - WSL](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-wsl)
+* [Remote - Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+* [Docker](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-docker)
 
 ### Configure and run 
 
@@ -31,6 +46,13 @@ npm install
 cp .env.dist .env
 # Add required .env 
 $EDITOR .env
+
+# Run database
+docker-compose up
+
+# Create db schemas and seed test data
+npm run migrate
+npm run seed
 
 # Run dev server with auto-reload on changes
 npm run dev
