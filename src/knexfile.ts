@@ -1,4 +1,4 @@
-import {join} from 'node:path';
+import {join} from 'path';
 import _ from './environment.d';
 
 export default {
