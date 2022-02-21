@@ -7,6 +7,9 @@ import {
 } from 'discord.js';
 import config from '../config';
 import Trivia from '../models/Trivia';
+import haikusModel from '../public/haikus';
+
+const Haikus = new haikusModel;
 
 const VITSIT = [
   'Sul on pieni',
@@ -39,6 +42,12 @@ export async function handleCommand(message: Message) {
       VITSIT[Math.floor(Math.random() * VITSIT.length)],
     );
     return;
+  }
+
+  if (content === 'haiku'){
+    await message.channel.send(
+      Haikus.randomHaiku()
+    );
   }
 
   if (content === 'categories') {
