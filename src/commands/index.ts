@@ -131,6 +131,7 @@ async function printHelp(channel: TextChannel | DMChannel | NewsChannel) {
   await channel.send(
     `Test: ${config.BotCommandPrefix}test
 Joke: ${config.BotCommandPrefix}vitsi
+Haiku: ${config.BotCommandPrefix}haiku
 Get random trivia: ${config.BotCommandPrefix}trivia <category>
 Add new trivia: ${config.BotCommandPrefix}trivia <category> <content>
 List categories: ${config.BotCommandPrefix}categories
