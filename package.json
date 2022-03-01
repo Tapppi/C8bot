@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "c8 discord botti",
   "engines": {
-    "node": ">= 14.16 <15"
+    "node": ">= 16 <17"
   },
   "scripts": {
     "dev": "npx nodemon",
@@ -46,24 +46,24 @@
     "rimraf": "^3.0.2",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4",
-    "xo": "^0.38.2"
+    "xo": "^0.48.0"
   },
   "dependencies": {
     "@types/nanoid-dictionary": "^4.2.0",
-    "discord.js": "^12.5.3",
+    "discord.js": "^13.6.0",
     "dotenv": "^8.2.0",
     "knex": "^0.95.4",
     "libsodium-wrappers": "^0.7.9",
-    "nanoid": "^3.1.22",
+    "nanoid": "^3.3.1",
     "nanoid-dictionary": "^4.3.0",
-    "objection": "^2.2.15",
+    "objection": "^3.0.1",
     "pg": "^8.6.0",
     "tslib": "^2.2.0",
     "zlib-sync": "^0.1.7"
   },
   "optionalDependencies": {
-    "erlpack": "^0.1.3",
     "bufferutil": "^4.0.3",
+    "erlpack": "^0.1.3",
     "utf-8-validate": "^5.0.4"
   },
   "xo": {
@@ -75,16 +75,23 @@
         "rules": {
           "unicorn/filename-case": [
             "error",
-            {"case": "pascalCase"}
+            {
+              "case": "pascalCase"
+            }
           ]
         }
       },
       {
-        "files": ["src/migrations/*.ts", "src/seeds/**/*.ts"],
+        "files": [
+          "src/migrations/*.ts",
+          "src/seeds/**/*.ts"
+        ],
         "rules": {
           "unicorn/filename-case": [
             "error",
-            {"case": "snakeCase"}
+            {
+              "case": "snakeCase"
+            }
           ]
         }
       }

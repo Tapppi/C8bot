@@ -7,7 +7,7 @@ Discord botti. MVP announcementtii ja muut random paskaa
 ## How to run
 
 ### Requirements
-* Node 14.x: recommend [nvm](https://github.com/nvm-sh/nvm) on linux and macOS
+* Node 16: recommend [nvm](https://github.com/nvm-sh/nvm) on linux and macOS
 * Docker desktop for compose, for local database setup
   * or docker compose directly, see [install instructions](https://docs.docker.com/compose/install/)
 
