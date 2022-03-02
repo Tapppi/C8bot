@@ -1,13 +1,26 @@
-import Discord from 'discord.js';
+import { Client, Intents } from 'discord.js';
 import knex from 'knex';
-import {Model as m} from 'objection';
+import { Model as m } from 'objection';
 
 import _ from './environment.d';
-import {handleCommand} from './commands';
+import { handleCommand } from './commands';
 import config from './config';
 import knexConfig from './knexfile';
 
-const client = new Discord.Client();
+const intents = new Intents([
+  Intents.FLAGS.GUILDS,
+  Intents.FLAGS.GUILD_MESSAGES,
+  Intents.FLAGS.GUILD_EMOJIS_AND_STICKERS,
+  Intents.FLAGS.GUILD_INTEGRATIONS,
+  Intents.FLAGS.GUILD_WEBHOOKS,
+  Intents.FLAGS.GUILD_INVITES,
+  Intents.FLAGS.GUILD_VOICE_STATES,
+  Intents.FLAGS.GUILD_MESSAGE_REACTIONS,
+  Intents.FLAGS.DIRECT_MESSAGES,
+  Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
+  Intents.FLAGS.GUILD_SCHEDULED_EVENTS,
+]);
+const client = new Client({ intents });
 
 async function main() {
   // Connect to database

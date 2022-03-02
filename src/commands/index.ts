@@ -1,7 +1,5 @@
 import {
-  DMChannel,
-  NewsChannel,
-  TextChannel,
+  PartialTextBasedChannelFields,
   Message,
   MessageEmbed,
 } from 'discord.js';
@@ -9,7 +7,7 @@ import config from '../config';
 import Trivia from '../models/Trivia';
 import haikusModel from '../public/haikus';
 
-const Haikus = new haikusModel;
+const Haikus = new haikusModel();
 
 const VITSIT = [
   'Sul on pieni',
@@ -44,10 +42,8 @@ export async function handleCommand(message: Message) {
     return;
   }
 
-  if (content === 'haiku'){
-    await message.channel.send(
-      Haikus.randomHaiku()
-    );
+  if (content === 'haiku') {
+    await message.channel.send(Haikus.randomHaiku());
   }
 
   if (content === 'categories') {
@@ -127,7 +123,7 @@ ${categoryList}`);
   }
 }
 
-async function printHelp(channel: TextChannel | DMChannel | NewsChannel) {
+async function printHelp(channel: PartialTextBasedChannelFields) {
   await channel.send(
     `Test: ${config.BotCommandPrefix}test
 Joke: ${config.BotCommandPrefix}vitsi
@@ -140,7 +136,7 @@ Delete trivia by id: ${config.BotCommandPrefix}del <triviaId>`,
 }
 
 async function sendPersonTrivia(
-  channel: TextChannel | DMChannel | NewsChannel,
+  channel: PartialTextBasedChannelFields,
   trivia: Trivia,
 ) {
   const embed = new MessageEmbed()
@@ -149,8 +145,8 @@ async function sendPersonTrivia(
       `${trivia.category.slice(0, 1).toUpperCase()}${trivia.category.slice(1)}`,
     )
     .setDescription(trivia.content)
-    .setFooter(`Author: ${trivia.author}, ID: ${trivia.id}`)
+    .setFooter({ text: `Author: ${trivia.author}, ID: ${trivia.id}` })
     .setTimestamp(trivia.createdAt);
 
-  return channel.send(embed);
+  return channel.send({ embeds: [embed] });
 }
