@@ -72,7 +72,7 @@ ${categoryList}`);
   }
 
   if (content.startsWith('trivia')) {
-    const match = /trivia (\S*)( (.*))?$/.exec(content);
+    const match = /trivia (\S*)( ([\S\s]*))?$/.exec(content);
 
     if (!match || !match[1]) {
       await printHelp(message.channel);

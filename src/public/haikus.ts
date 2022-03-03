@@ -3,6 +3,7 @@
  * And I want my fuckin multiline string literals.
  * So I hardcoded this file to hold some premium 100% certified not-stolen haikus.
  *
+ * NB: I just added multiline string literals to the regex for adding trivia with .trivia
  */
 
 export default function randomHaiku() {
