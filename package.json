@@ -6,16 +6,16 @@
     "node": ">= 16 <17"
   },
   "scripts": {
-    "dev": "npx nodemon",
+    "dev": "nodemon",
     "start": "node --unhandled-rejections=strict build/src/index.js",
     "clean": "rimraf coverage build tmp",
-    "build": "npx tsc -p tsconfig.release.json",
-    "build:watch": "npx tsc -w -p tsconfig.release.json",
-    "test": "npx ava",
-    "test:watch": "npx ava --watch",
-    "format": "npx prettier --config ./.prettierrc.json --ignore-path ./.prettierignore --write",
-    "lint": "npx xo",
-    "lint:fix": "npx xo --fix",
+    "build": "tsc -p tsconfig.release.json",
+    "build:watch": "tsc -w -p tsconfig.release.json",
+    "test": "ava",
+    "test:watch": "ava --watch",
+    "format": "prettier --config ./.prettierrc.json --ignore-path ./.prettierignore --write",
+    "lint": "xo",
+    "lint:fix": "xo --fix",
     "migrate": "cd src && npx dotenv-cli dotenv -e ../.env npx knex migrate:latest",
     "rollback": "cd src && npx dotenv-cli dotenv -e ../.env npx knex migrate:rollback",
     "seed": "cd src && npx dotenv-cli dotenv -e ../.env npx knex seed:run",
@@ -36,7 +36,7 @@
   },
   "homepage": "https://github.com/Tapppi/C8bot#readme",
   "devDependencies": {
-    "@types/node": "^14.14.41",
+    "@types/node": "^16.11.26",
     "ava": "^3.15.0",
     "dotenv-cli": "^4.0.0",
     "husky": "^6.0.0",
@@ -44,7 +44,7 @@
     "nodemon": "^2.0.7",
     "prettier": "^2.2.1",
     "rimraf": "^3.0.2",
-    "ts-node": "^9.1.1",
+    "ts-node": "^10.6.0",
     "typescript": "^4.2.4",
     "xo": "^0.48.0"
   },
@@ -68,7 +68,31 @@
   },
   "xo": {
     "prettier": true,
-    "unicorn/filename-case": "none",
+    "rules": {
+      "unicorn/filename-case": [
+        "error",
+        {
+          "case": "kebabCase"
+        }
+      ],
+      "import/extensions": [
+        "error",
+        "never",
+        {
+          "js": "never",
+          "jsx": "never",
+          "ts": "never",
+          "tsx": "never"
+        }
+      ],
+      "unicorn/prefer-modules": 0,
+      "@typescript-eslint/no-unused-vars": [
+        "error",
+        {
+          "varsIgnorePattern": "_"
+        }
+      ]
+    },
     "overrides": [
       {
         "files": "src/models/*.ts",

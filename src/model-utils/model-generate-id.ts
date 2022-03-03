@@ -8,7 +8,7 @@ type Plugin = <M extends Constructor<Model>>(modelClass: M) => M;
 
 const generateId = customAlphabet(nolookalikes, 12);
 
-const GenerateIds: Plugin = (Model) => {
+const generateIds: Plugin = (Model) => {
   return class extends Model {
     id!: string;
 
@@ -20,4 +20,4 @@ const GenerateIds: Plugin = (Model) => {
   };
 };
 
-export default GenerateIds;
+export default generateIds;

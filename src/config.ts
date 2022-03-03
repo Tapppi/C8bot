@@ -1,3 +1,4 @@
+import process from 'node:process';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -11,9 +12,10 @@ if (
 }
 
 const config = {
-  NodeEnv: process.env.NODE_ENV,
-  DiscordToken: process.env.DISCORD_TOKEN,
-  BotCommandPrefix: process.env.BOT_COMMAND_PREFIX ?? '.',
+  nodeEnv: process.env.NODE_ENV,
+  discordToken: process.env.DISCORD_TOKEN,
+  databaseUrl: process.env.DATABASE_URL,
+  botCommandPrefix: process.env.BOT_COMMAND_PREFIX ?? '.',
 };
 
 for (const [key, value] of Object.entries(config)) {

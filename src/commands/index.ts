@@ -1,15 +1,9 @@
-import {
-  PartialTextBasedChannelFields,
-  Message,
-  MessageEmbed,
-} from 'discord.js';
+import {PartialTextBasedChannelFields, Message, MessageEmbed} from 'discord.js';
 import config from '../config';
 import Trivia from '../models/Trivia';
-import haikusModel from '../public/haikus';
+import randomHaiku from '../public/haikus';
 
-const Haikus = new haikusModel();
-
-const VITSIT = [
+const vitsit = [
   'Sul on pieni',
   'Mitä tähän nyt sanois..',
   'Heikki on komee',
@@ -23,7 +17,7 @@ const VITSIT = [
 export async function handleCommand(message: Message) {
   // Console.log(`${message.author.username} lähetti viestin: ${message.content}`);
 
-  const content = message.content.slice(config.BotCommandPrefix.length);
+  const content = message.content.slice(config.botCommandPrefix.length);
 
   if (content === 'help') {
     await printHelp(message.channel);
@@ -37,13 +31,13 @@ export async function handleCommand(message: Message) {
 
   if (content === 'vitsi') {
     await message.channel.send(
-      VITSIT[Math.floor(Math.random() * VITSIT.length)],
+      vitsit[Math.floor(Math.random() * vitsit.length)],
     );
     return;
   }
 
   if (content === 'haiku') {
-    await message.channel.send(Haikus.randomHaiku());
+    await message.channel.send(randomHaiku());
   }
 
   if (content === 'categories') {
@@ -125,13 +119,13 @@ ${categoryList}`);
 
 async function printHelp(channel: PartialTextBasedChannelFields) {
   await channel.send(
-    `Test: ${config.BotCommandPrefix}test
-Joke: ${config.BotCommandPrefix}vitsi
-Haiku: ${config.BotCommandPrefix}haiku
-Get random trivia: ${config.BotCommandPrefix}trivia <category>
-Add new trivia: ${config.BotCommandPrefix}trivia <category> <content>
-List categories: ${config.BotCommandPrefix}categories
-Delete trivia by id: ${config.BotCommandPrefix}del <triviaId>`,
+    `Test: ${config.botCommandPrefix}test
+Joke: ${config.botCommandPrefix}vitsi
+Haiku: ${config.botCommandPrefix}haiku
+Get random trivia: ${config.botCommandPrefix}trivia <category>
+Add new trivia: ${config.botCommandPrefix}trivia <category> <content>
+List categories: ${config.botCommandPrefix}categories
+Delete trivia by id: ${config.botCommandPrefix}del <triviaId>`,
   );
 }
 
@@ -145,8 +139,8 @@ async function sendPersonTrivia(
       `${trivia.category.slice(0, 1).toUpperCase()}${trivia.category.slice(1)}`,
     )
     .setDescription(trivia.content)
-    .setFooter({ text: `Author: ${trivia.author}, ID: ${trivia.id}` })
+    .setFooter({text: `Author: ${trivia.author}, ID: ${trivia.id}`})
     .setTimestamp(trivia.createdAt);
 
-  return channel.send({ embeds: [embed] });
+  return channel.send({embeds: [embed]});
 }

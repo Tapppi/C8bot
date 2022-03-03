@@ -1,9 +1,11 @@
-import { Client, Intents } from 'discord.js';
-import knex from 'knex';
-import { Model as m } from 'objection';
+import process from 'node:process';
 
-import _ from './environment.d';
-import { handleCommand } from './commands';
+import {Client, Intents} from 'discord.js';
+import knex from 'knex';
+import {Model as m} from 'objection';
+
+import type _ from './environment.d';
+import {handleCommand} from './commands';
 import config from './config';
 import knexConfig from './knexfile';
 
@@ -20,7 +22,7 @@ const intents = new Intents([
   Intents.FLAGS.DIRECT_MESSAGE_REACTIONS,
   Intents.FLAGS.GUILD_SCHEDULED_EVENTS,
 ]);
-const client = new Client({ intents });
+const client = new Client({intents});
 
 async function main() {
   // Connect to database
@@ -33,14 +35,14 @@ async function main() {
   await db.raw('SELECT 1;');
 
   // Login to discord
-  await client.login(config.DiscordToken);
+  await client.login(config.discordToken);
 
   client.on('ready', () => {
     console.log('Bot ready');
   });
 
-  client.on('message', async (message) => {
-    if (message.content.startsWith(config.BotCommandPrefix)) {
+  client.on('messageCreate', async (message) => {
+    if (message.content.startsWith(config.botCommandPrefix)) {
       await handleCommand(message);
     }
   });
