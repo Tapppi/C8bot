@@ -1,4 +1,5 @@
-import {join} from 'path';
+import {join} from 'node:path';
+import process from 'node:process';
 import _ from './environment.d';
 
 export default {

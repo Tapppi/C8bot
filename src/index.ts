@@ -2,6 +2,7 @@ import process from 'node:process';
 
 import {Client, Intents} from 'discord.js';
 import knex from 'knex';
+import type {Knex as _Knex} from 'knex';
 import {Model as m} from 'objection';
 
 import type _ from './environment.d';
@@ -26,7 +27,8 @@ const client = new Client({intents});
 
 async function main() {
   // Connect to database
-  const db = knex(knexConfig);
+  // eslint-disable-next-line @typescript-eslint/no-unnecessary-type-assertion
+  const db = knex(knexConfig) as _Knex<any, Array<Record<string, any>>>;
   m.knex(db);
   if (process.env.NODE_ENV === 'production') {
     await db.migrate.latest();

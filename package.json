@@ -6,16 +6,16 @@
     "node": ">= 16 <17"
   },
   "scripts": {
-    "dev": "nodemon",
+    "dev": "npx nodemon",
     "start": "node --unhandled-rejections=strict build/src/index.js",
     "clean": "rimraf coverage build tmp",
-    "build": "tsc -p tsconfig.release.json",
-    "build:watch": "tsc -w -p tsconfig.release.json",
-    "test": "ava",
-    "test:watch": "ava --watch",
-    "format": "prettier --config ./.prettierrc.json --ignore-path ./.prettierignore --write",
-    "lint": "xo",
-    "lint:fix": "xo --fix",
+    "build": "npx tsc -p tsconfig.release.json",
+    "build:watch": "npx tsc -w -p tsconfig.release.json",
+    "test": "npx ava",
+    "test:watch": "npx ava --watch",
+    "format": "npx prettier --config ./.prettierrc.json --ignore-path ./.prettierignore --write",
+    "lint": "npx xo",
+    "lint:fix": "npx xo --fix",
     "migrate": "cd src && npx dotenv-cli dotenv -e ../.env npx knex migrate:latest",
     "rollback": "cd src && npx dotenv-cli dotenv -e ../.env npx knex migrate:rollback",
     "seed": "cd src && npx dotenv-cli dotenv -e ../.env npx knex seed:run",
@@ -85,11 +85,11 @@
           "tsx": "never"
         }
       ],
-      "unicorn/prefer-modules": 0,
+      "unicorn/prefer-module": "off",
       "@typescript-eslint/no-unused-vars": [
         "error",
         {
-          "varsIgnorePattern": "_"
+          "varsIgnorePattern": "^_"
         }
       ]
     },
