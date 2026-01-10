@@ -7,8 +7,8 @@
  */
 
 export default function randomHaiku() {
-  const randIndex = Math.floor(Math.random() * haikus.length + 1);
-  return haikus[randIndex];
+  const randomIndex = Math.floor(Math.random() * haikus.length + 1);
+  return haikus[randomIndex];
 }
 
 const haikus = [

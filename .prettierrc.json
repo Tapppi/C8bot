@@ -2,6 +2,7 @@
   "singleQuote": true,
   "trailingComma": "all",
   "tabWidth": 2,
+  "bracketSpacing": false,
   "overrides": [
     {
       "files": ["*.ts", "*.tsx"],

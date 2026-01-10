@@ -2,7 +2,7 @@ import process from 'node:process';
 import dotenv from 'dotenv';
 
 dotenv.config();
-process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+process.env.NODE_ENV ||= 'development';
 
 if (
   process.env.NODE_ENV !== 'development' &&

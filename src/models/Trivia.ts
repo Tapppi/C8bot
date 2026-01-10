@@ -1,6 +1,5 @@
-import {Model, Pojo} from 'objection';
-
-import generateIds from '../model-utils/model-generate-id';
+import {Model, type Pojo} from 'objection';
+import generateIds from '../model-utils/model-generate-id.js';
 
 export default class Trivia extends generateIds(Model) {
   static tableName = 'trivia';
@@ -26,7 +25,7 @@ export default class Trivia extends generateIds(Model) {
   $formatJson(json: Pojo) {
     json = super.$formatJson(json);
 
-    json.createdAt = new Date(json.createdAt);
+    json.createdAt = new Date(json.createdAt as string | number | Date);
 
     return json;
   }

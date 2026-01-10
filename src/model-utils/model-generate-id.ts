@@ -1,8 +1,8 @@
-import {Model, QueryContext} from 'objection';
-import {customAlphabet} from 'nanoid/async';
+import {type Model, type QueryContext} from 'objection';
+import {customAlphabet} from 'nanoid';
 import {nolookalikes} from 'nanoid-dictionary';
 
-type Constructor<T> = new (...args: any[]) => T;
+type Constructor<T> = new (...arguments_: any[]) => T;
 
 type Plugin = <M extends Constructor<Model>>(modelClass: M) => M;
 
@@ -15,7 +15,7 @@ const generateIds: Plugin = (Model) => {
     async $beforeInsert(context: QueryContext) {
       await super.$beforeInsert(context);
 
-      this.id = this.id || (await generateId());
+      this.id ||= generateId();
     }
   };
 };
