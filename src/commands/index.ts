@@ -1,7 +1,7 @@
-import {PartialTextBasedChannelFields, Message, MessageEmbed} from 'discord.js';
-import config from '../config';
-import Trivia from '../models/Trivia';
-import randomHaiku from '../public/haikus';
+import {type Message, EmbedBuilder} from 'discord.js';
+import config from '../config.js';
+import Trivia from '../models/Trivia.js';
+import randomHaiku from '../public/haikus.js';
 
 const vitsit = [
   'Sul on pieni',
@@ -14,13 +14,13 @@ const vitsit = [
   'Miksi Röllin vene upposi? Siitä puuttui tilipitappi',
 ];
 
-export async function handleCommand(message: Message) {
+export async function handleCommand(message: Message): Promise<void> {
   // Console.log(`${message.author.username} lähetti viestin: ${message.content}`);
 
   const content = message.content.slice(config.botCommandPrefix.length);
 
   if (content === 'help') {
-    await printHelp(message.channel);
+    await printHelp(message);
     return;
   }
 
@@ -30,14 +30,12 @@ export async function handleCommand(message: Message) {
   }
 
   if (content === 'vitsi') {
-    await message.channel.send(
-      vitsit[Math.floor(Math.random() * vitsit.length)],
-    );
+    await message.reply(vitsit[Math.floor(Math.random() * vitsit.length)]);
     return;
   }
 
   if (content === 'haiku') {
-    await message.channel.send(randomHaiku());
+    await message.reply(randomHaiku());
   }
 
   if (content === 'categories') {
@@ -52,7 +50,7 @@ export async function handleCommand(message: Message) {
       .map((trivia) => `_${trivia.category}_ ${trivia.categoryCount!}`)
       .join('\n');
 
-    await message.channel.send(`**Available categories** (${categories.length})
+    await message.reply(`**Available categories** (${categories.length})
 ${categoryList}`);
     return;
   }
@@ -60,8 +58,8 @@ ${categoryList}`);
   if (content.startsWith('del')) {
     const match = /del (\S*)$/.exec(content);
 
-    if (!match || !match[1]) {
-      await printHelp(message.channel);
+    if (!match?.[1]) {
+      await printHelp(message);
       return;
     }
 
@@ -74,8 +72,8 @@ ${categoryList}`);
   if (content.startsWith('trivia')) {
     const match = /trivia (\S*)( ([\S\s]*))?$/.exec(content);
 
-    if (!match || !match[1]) {
-      await printHelp(message.channel);
+    if (!match?.[1]) {
+      await printHelp(message);
       return;
     }
 
@@ -90,7 +88,7 @@ ${categoryList}`);
         .returning('*');
 
       await message.react('✅');
-      await sendPersonTrivia(message.channel, trivia);
+      await sendPersonTrivia(message, trivia);
     } else {
       // No new content found, get random trivia
       const trivia = await Trivia.query()
@@ -108,17 +106,17 @@ ${categoryList}`);
 
       if (trivia.length === 0) {
         await message.react('❌');
-        await message.channel.send(`No trivia found for category: ${match[1]}`);
+        await message.reply(`No trivia found for category: ${match[1]}`);
         return;
       }
 
-      await sendPersonTrivia(message.channel, trivia[0]);
+      await sendPersonTrivia(message, trivia[0]);
     }
   }
 }
 
-async function printHelp(channel: PartialTextBasedChannelFields) {
-  await channel.send(
+async function printHelp(message: Message) {
+  await message.reply(
     `Test: ${config.botCommandPrefix}test
 Joke: ${config.botCommandPrefix}vitsi
 Haiku: ${config.botCommandPrefix}haiku
@@ -129,12 +127,9 @@ Delete trivia by id: ${config.botCommandPrefix}del <triviaId>`,
   );
 }
 
-async function sendPersonTrivia(
-  channel: PartialTextBasedChannelFields,
-  trivia: Trivia,
-) {
-  const embed = new MessageEmbed()
-    .setColor('#0099ff')
+async function sendPersonTrivia(message: Message, trivia: Trivia) {
+  const embed = new EmbedBuilder()
+    .setColor(0x00_99_ff)
     .setTitle(
       `${trivia.category.slice(0, 1).toUpperCase()}${trivia.category.slice(1)}`,
     )
@@ -142,5 +137,5 @@ async function sendPersonTrivia(
     .setFooter({text: `Author: ${trivia.author}, ID: ${trivia.id}`})
     .setTimestamp(trivia.createdAt);
 
-  return channel.send({embeds: [embed]});
+  return message.reply({embeds: [embed]});
 }

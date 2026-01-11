@@ -1,6 +1,9 @@
-import {join} from 'node:path';
+import {dirname, join} from 'node:path';
 import process from 'node:process';
-import _ from './environment.d';
+import {fileURLToPath} from 'node:url';
+import type _ from './environment.d.js';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default {
   development: {
